@@ -10,7 +10,7 @@ RUN useradd tgproxy -u 10000
 USER tgproxy
 WORKDIR /usr/src/app
 
-RUN git clone --recursive https://github.com/alexbers/mtprotoproxy.git
+RUN git clone --recursive https://github.com/alexbers/mtprotoproxy
 WORKDIR /usr/src/mtprotoproxy
 
 WORKDIR /home/tgproxy/
