@@ -5,14 +5,12 @@ Run apt-get install --no-install-recommends git python3 python3-uvloop python3-c
 RUN rm -rf /var/lib/apt/lists/*
 RUN setcap cap_net_bind_service=+ep /usr/bin/python3.8
 
-
-
 RUN useradd tgproxy -u 10000
 
 USER tgproxy
 WORKDIR /usr/src/app
 
-RUN git clone -b stable https://github.com/alexbers/mtprotoproxy.git
+RUN git clone --recursive https://github.com/alexbers/mtprotoproxy.git
 WORKDIR /usr/src/mtprotoproxy
 
 WORKDIR /home/tgproxy/
