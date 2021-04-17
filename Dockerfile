@@ -10,4 +10,3 @@ RUN ls -al
 
 
 CMD ["python3", "mtprotoproxy.py"]
-CMD ["docker-compose", "logs"]
