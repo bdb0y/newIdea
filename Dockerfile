@@ -5,6 +5,7 @@ RUN apt-get -qq update
 
 WORKDIR /usr/src/app
 RUN apt-get install make git zlib1g-dev libssl-dev gperf cmake clang-10 libc++-dev libc++abi-dev
+RUN Y
 RUN git clone --recursive https://github.com/tdlib/telegram-bot-api.git
 
 WORKDIR /usr/src/app/telegram-bot-api
