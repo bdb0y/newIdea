@@ -1,9 +1,10 @@
-FROM ubuntu:18.04
+FROM ubuntu:20
 
 WORKDIR /usr/src/app
 RUN apt-get -qq update
 RUN apt-get -qq install build-essential libssl-dev
 RUN apt-get -qq install wget
+RUN apt-get -qq install g++
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.16.5/cmake-3.16.5.tar.gz
 RUN tar -zxvf cmake-3.16.5.tar.gz
 WORKDIR /usr/src/app/cmake-3.16.5
