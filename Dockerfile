@@ -1,19 +1,14 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
-WORKDIR /usr/src/app
-RUN apt-get -qq update
+RUN apt-get update && apt-get install --no-install-recommends -y python3 python3-uvloop python3-cryptography python3-socks libcap2-bin ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN setcap cap_net_bind_service=+ep /usr/bin/python3.8
 
-WORKDIR /usr/src/app
-RUN apt-get install make git zlib1g-dev libssl-dev gperf cmake clang-10 libc++-dev libc++abi-dev -y
-RUN git clone --recursive https://github.com/tdlib/telegram-bot-api.git
+RUN useradd tgproxy -u 10000
 
-WORKDIR /usr/src/app/telegram-bot-api
-RUN rm -rf build
-RUN mkdir build
+USER tgproxy
 
-WORKDIR /usr/src/app/telegram-bot-api/build
-RUN CXXFLAGS="-stdlib=libc++" CC=/usr/bin/clang-10 CXX=/usr/bin/clang++-10 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=.. ..
-RUN cmake --build . --target install
+WORKDIR /home/tgproxy/
 
-WORKDIR /sur/src/app
-RUN ls -l telegram-bot-api/bin/telegram-bot-api*
+COPY --chown=tgproxy mtprotoproxy.py config.py /home/tgproxy/
+
+CMD ["python3", "mtprotoproxy.py"]
