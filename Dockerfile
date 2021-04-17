@@ -9,4 +9,4 @@ RUN git clone https://github.com/alexbers/mtprotoproxy.git
 RUN ls -al
 
 
-CMD ["python3", "mtprotoproxy.py"]
+CMD ["python3", "/usr/src/mtprotoproxy/mtprotoproxy.py"]
