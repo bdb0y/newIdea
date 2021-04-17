@@ -1,15 +1,21 @@
-ADD file:bc844c4763367b5f0ac7b9aebf7d43900d98f2aca101b886f185347b24973dbe in / 
+FROM ubuntu:18.04
 
- CMD ["bash"]
- 
- COPY file:27396786e98813df28ecb61c3e62d14a73504b5f333cdd620abc6b7734509e27 in /usr/local/bin 
- 
- /bin/sh -c mkdir /data
- 
- /bin/sh -c set -eux ; 	apt-get update ; 	apt-get install -y --no-install-recommends curl ca-certificates ; 	rm -rf /var/lib/apt/lists/* ;
- 
- COPY dir:1f529c737fa6ef8906ece0ea6b0604395ae3893dff3ec93fad87152bab953363 in /etc/telegram 
- 
- COPY file:20c4924ed6f715313284c8aeaaaa10894896b071fffd1ed9e43c25483d343c17 in /run.sh 
- 
-  CMD ["/bin/sh" "-c" "/bin/bash /run.sh"]
+WORKDIR /usr/src/app
+RUN apt-get -qq update
+RUN apt-get upgrade
+RUN snap install cmake --classic
+RUN cmake --version
+
+RUN apt-get -qq install make git zlib1g-dev libssl-dev gperf cmake g++
+RUN git clone --recursive https://github.com/tdlib/telegram-bot-api.git
+
+WORKDIR /usr/src/app/telegram-bot-api
+RUN rm -rf build
+RUN mkdir build
+
+WORKDIR /usr/src/app/telegram-bot-api/build
+RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=.. ..
+RUN cmake --build . --target install
+
+WORKDIR /sur/src/app
+RUN ls -l telegram-bot-api/bin/telegram-bot-api*
