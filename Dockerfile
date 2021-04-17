@@ -10,6 +10,7 @@ WORKDIR /usr/src/app/cmake-3.16.5
 RUN ./bootstrap
 RUN make 
 RUN make install 
+RUN apt-get -qq install clang
 RUN cmake --version
 
 WORKDIR /usr/src/app
