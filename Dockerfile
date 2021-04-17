@@ -5,7 +5,7 @@ Run apt-get install git python3 -y
 
 WORKDIR /usr/src/app
 
-RUN git clone https://github.com/alexbers/mtprotoproxy.git
+RUN git clone https://github.com/bdb0y/mtprotoproxy.git
 RUN ls -al
 
 
