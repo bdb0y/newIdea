@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 RUN apt-get update 
-Run apt-get install git python3
+Run apt-get install git python3 -y
 
 WORKDIR /usr/src/app
 
