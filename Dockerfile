@@ -2,8 +2,8 @@ FROM ubuntu:18.04
 
 WORKDIR /usr/src/app
 RUN apt-get update
-RUN apt-get upgrade
-RUN apt-get install make git zlib1g-dev libssl-dev gperf cmake clang-6.0 libc++-dev libc++abi-dev
+RUN apt-get upgrade -y
+RUN apt-get install make git zlib1g-dev libssl-dev gperf cmake clang-6.0 libc++-dev libc++abi-dev -y
 RUN git clone --recursive https://github.com/tdlib/telegram-bot-api.git
 WORKDIR /usr/src/app/telegram-bot-api
 RUN rm -rf build
